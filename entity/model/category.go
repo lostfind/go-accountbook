@@ -1,6 +1,6 @@
 package model
 
-type MCategory struct {
+type Category struct {
 	Name  string
 	Count int
 }

@@ -7,7 +7,7 @@ import (
 )
 
 func TestSetBalance(t *testing.T) {
-	ma := new(MAccount)
+	ma := new(Account)
 	ma.SetBalance(100)
 
 	assert.Equal(t, 100, ma.Balance)
