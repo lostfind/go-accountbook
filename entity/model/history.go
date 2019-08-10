@@ -13,12 +13,17 @@ type History struct {
 	Amount     int
 	Memo       string
 	Date       time.Time
-	Balance    int
 }
 
 // NewHistory is constructor History
-func NewHistory() *History {
-	return &History{}
+func NewHistory(account, category, amount int, memo string, date time.Time) *History {
+	return &History{
+		AccountID:  account,
+		CategoryID: category,
+		Amount:     amount,
+		Memo:       memo,
+		Date:       date,
+	}
 }
 
 // TableName return Table Name
@@ -26,18 +31,10 @@ func (History) TableName() string {
 	return "t_history"
 }
 
-// SetBalance calculate and set balance
-func (t *History) SetBalance(preBalance int) {
-	if t.Amount != 0 {
-		t.Balance = preBalance + t.Amount
-	}
-}
-
 // GetHistory return public fields for app.History
 func (t *History) GetHistory() *app.History {
 	return &app.History{
-		Amount:  t.Amount,
-		Balance: t.Balance,
-		Memo:    t.Memo,
+		Amount: t.Amount,
+		Memo:   t.Memo,
 	}
 }
