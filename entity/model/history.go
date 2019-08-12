@@ -8,6 +8,7 @@ import (
 
 // History is t_history model
 type History struct {
+	ID         int
 	AccountID  int
 	CategoryID int
 	Amount     int
