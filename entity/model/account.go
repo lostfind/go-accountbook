@@ -2,17 +2,22 @@ package model
 
 // Account is m_account model
 type Account struct {
-	ID          int
-	AccountName string
-	Balance     int
+	ID      int    `gorm:"primary_key"`
+	Name    string `gorm:"name"`
+	Balance int    `gorm:"balance"`
 }
 
 // NewAccount constructor Account
 func NewAccount(name string, balance int) *Account {
 	return &Account{
-		AccountName: name,
-		Balance:     balance,
+		Name:    name,
+		Balance: balance,
 	}
+}
+
+// TableName return Table Name
+func (Account) TableName() string {
+	return "m_accounts"
 }
 
 // SetBalance is Set Balance
