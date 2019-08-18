@@ -6,14 +6,14 @@ import (
 	"github.com/lostfind/go-accountbook/entity/app"
 )
 
-// History is t_history model
+// History is t_histories model
 type History struct {
-	ID         int
-	AccountID  int
-	CategoryID int
-	Amount     int
-	Memo       string
-	Date       time.Time
+	ID         int       `gorm:"primary_key"`
+	AccountID  int       `gorm:"account_id"`
+	CategoryID int       `gorm:"category_id"`
+	Amount     int       `gorm:"amount"`
+	Memo       string    `gorm:"memo"`
+	Date       time.Time `gorm:"date"`
 }
 
 // NewHistory is constructor History
@@ -29,7 +29,7 @@ func NewHistory(account, category, amount int, memo string, date time.Time) *His
 
 // TableName return Table Name
 func (History) TableName() string {
-	return "t_history"
+	return "t_histories"
 }
 
 // GetHistory return public fields for app.History
