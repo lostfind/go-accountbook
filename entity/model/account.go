@@ -28,3 +28,21 @@ func (Account) TableName() string {
 func (m *Account) SetBalance(balance int) {
 	m.Balance = balance
 }
+
+// GetTypeName return Account type name
+func (m *Account) GetTypeName() string {
+	switch m.AccountType {
+	case 1:
+		return "Cash"
+	case 2:
+		return "Bank"
+	case 3:
+		return "Debit Card"
+	case 4:
+		return "Credit Card"
+	case 5:
+		return "Electric Money"
+	}
+
+	return ""
+}
