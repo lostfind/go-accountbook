@@ -2,9 +2,11 @@ package model
 
 // Category is m_categoris model
 type Category struct {
-	ID    int    `gorm:"primary_key"`
-	Name  string `gorm:"name"`
-	Count int    `gorm:"count"`
+	ID         int    `gorm:"primary_key"`
+	Name       string `gorm:"name"`
+	Count      int    `gorm:"count"`
+	Sort       int    `gorm:"sort"`
+	DeleteFlag bool   `gorm:"is_delete"`
 }
 
 // NewCategory is constructor Category
