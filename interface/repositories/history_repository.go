@@ -17,8 +17,8 @@ func NewHistoryRepository(db *gorm.DB) repository.HistoryRepository {
 	}
 }
 
-func (r *historyRepository) FindAll() (accounts []*model.History, err error) {
-	err = r.db.Find(&accounts).Error
+func (r *historyRepository) FindAll() (histories []*model.History, err error) {
+	err = r.db.Find(&histories).Error
 	return
 }
 

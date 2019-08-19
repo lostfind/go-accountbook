@@ -8,6 +8,7 @@ import (
 // HistoryUsecase is interactor of History
 type HistoryUsecase interface {
 	RegisterHistory(*model.History) error
+	ListHistory() ([]*model.History, error)
 }
 
 type historyUsecase struct {
