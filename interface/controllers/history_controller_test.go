@@ -1,37 +1,53 @@
 package controllers
 
 import (
+	"math/rand"
 	"testing"
 	"time"
 
-	"github.com/lostfind/go-accountbook/conf"
 	"github.com/lostfind/go-accountbook/entity/model"
-	"github.com/lostfind/go-accountbook/infrastructure/datastore"
-	"github.com/lostfind/go-accountbook/interface/repositories"
 	"github.com/lostfind/go-accountbook/usecase/interactor"
 	"github.com/stretchr/testify/assert"
 )
 
-func TestGetListHistory(t *testing.T) {
-	conf.Read()
-	db, _ := datastore.NewMySQLDB()
-	repo := repositories.NewHistoryRepository(db)
-	interactor := interactor.NewHistoryUsecase(repo)
+type mockHistoryUsecase struct {
+}
 
+func NewMockHistoryUsecase() interactor.HistoryUsecase {
+	return &mockHistoryUsecase{}
+}
+
+func (u *mockHistoryUsecase) RegisterHistory(history *model.History) (err error) {
+	history.ID = rand.Intn(10)
+	return
+}
+
+func (u *mockHistoryUsecase) GetHistories() (histories []*model.History, err error) {
+	count := rand.Intn(10)
+
+	for i := 0; i < count; i++ {
+		history := new(model.History)
+		histories = append(histories, history)
+	}
+	return
+}
+
+func (u *mockHistoryUsecase) GetHistory(id int) (history *model.History, err error) {
+	return
+}
+
+func TestGetHistories(t *testing.T) {
+	interactor := NewMockHistoryUsecase()
 	controller := NewHistoryController(interactor)
 
-	histories, err := controller.GetListHistory()
+	histories, err := controller.GetHistories()
 
 	assert.NoError(t, err)
 	assert.NotEmpty(t, histories)
 }
 
 func TestRegisterHistory(t *testing.T) {
-	conf.Read()
-	db, _ := datastore.NewMySQLDB()
-	repo := repositories.NewHistoryRepository(db)
-	interactor := interactor.NewHistoryUsecase(repo)
-
+	interactor := NewMockHistoryUsecase()
 	controller := NewHistoryController(interactor)
 
 	history := model.NewHistory(1, 1, 4000, "TEST", time.Now())

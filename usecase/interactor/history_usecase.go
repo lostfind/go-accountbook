@@ -2,13 +2,14 @@ package interactor
 
 import (
 	"github.com/lostfind/go-accountbook/entity/model"
-	"github.com/lostfind/go-accountbook/usecase/repository"
+	"github.com/lostfind/go-accountbook/entity/repository"
 )
 
 // HistoryUsecase is interactor of History
 type HistoryUsecase interface {
 	RegisterHistory(*model.History) error
-	ListHistory() ([]*model.History, error)
+	GetHistories() ([]*model.History, error)
+	GetHistory(id int) (*model.History, error)
 }
 
 type historyUsecase struct {
@@ -30,10 +31,15 @@ func (u *historyUsecase) RegisterHistory(history *model.History) error {
 	return nil
 }
 
-func (u *historyUsecase) ListHistory() ([]*model.History, error) {
-	histories, err := u.repo.FindAll()
+func (u *historyUsecase) GetHistories() (histories []*model.History, err error) {
+	histories, err = u.repo.FindAll()
 	if err != nil {
 		return nil, err
 	}
-	return histories, nil
+	return
+}
+
+func (u *historyUsecase) GetHistory(id int) (history *model.History, err error) {
+	history, err = u.repo.Find(id)
+	return
 }

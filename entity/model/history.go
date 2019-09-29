@@ -2,8 +2,6 @@ package model
 
 import (
 	"time"
-
-	"github.com/lostfind/go-accountbook/entity/app"
 )
 
 // History is t_histories model
@@ -30,12 +28,4 @@ func NewHistory(account, category, amount int, memo string, date time.Time) *His
 // TableName return Table Name
 func (History) TableName() string {
 	return "t_histories"
-}
-
-// GetHistory return public fields for app.History
-func (t *History) GetHistory() *app.History {
-	return &app.History{
-		Amount: t.Amount,
-		Memo:   t.Memo,
-	}
 }

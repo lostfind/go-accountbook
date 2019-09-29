@@ -1,9 +1,12 @@
 package repository
 
-import "github.com/lostfind/go-accountbook/entity/model"
+import (
+	"github.com/lostfind/go-accountbook/entity/model"
+)
 
 // HistoryRepository is Repository for History
 type HistoryRepository interface {
-	Save(*model.History) error
+	Save(history *model.History) error
+	Find(id int) (*model.History, error)
 	FindAll() ([]*model.History, error)
 }
