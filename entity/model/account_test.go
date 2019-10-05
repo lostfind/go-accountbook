@@ -16,9 +16,11 @@ func TestSetBalance(t *testing.T) {
 func TestNewAccount(t *testing.T) {
 	name := "TestAccount"
 	balance := 1238523
+	accountType := 1
 
-	account := NewAccount(name, balance)
+	account := NewAccount(name, balance, accountType)
 
-	assert.Equal(t, name, account.AccountName)
+	assert.Equal(t, name, account.Name)
 	assert.Equal(t, balance, account.Balance)
+	assert.Equal(t, accountType, account.AccountType)
 }
