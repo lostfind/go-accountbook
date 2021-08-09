@@ -1,4 +1,4 @@
-package interactor
+package usecase
 
 import (
 	"math/rand"
@@ -7,8 +7,8 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	"go-accountbook/entity/model"
-	"go-accountbook/entity/repository"
+	"go-accountbook/domain/model"
+	"go-accountbook/domain/repository"
 )
 
 type mockHistoryRepository struct {

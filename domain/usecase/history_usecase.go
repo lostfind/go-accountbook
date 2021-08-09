@@ -1,8 +1,8 @@
-package interactor
+package usecase
 
 import (
-	"go-accountbook/entity/model"
-	"go-accountbook/entity/repository"
+	"go-accountbook/domain/model"
+	"go-accountbook/domain/repository"
 )
 
 // HistoryUsecase is interactor of History

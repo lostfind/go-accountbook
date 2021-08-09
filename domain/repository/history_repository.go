@@ -1,7 +1,7 @@
 package repository
 
 import (
-	"go-accountbook/entity/model"
+	"go-accountbook/domain/model"
 )
 
 // HistoryRepository is Repository for History

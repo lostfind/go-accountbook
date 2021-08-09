@@ -5,8 +5,8 @@ import (
 	"testing"
 	"time"
 
-	"go-accountbook/entity/model"
-	"go-accountbook/usecase/interactor"
+	"go-accountbook/domain/model"
+	"go-accountbook/domain/usecase"
 
 	"github.com/stretchr/testify/assert"
 )
@@ -14,7 +14,7 @@ import (
 type mockHistoryUsecase struct {
 }
 
-func NewMockHistoryUsecase() interactor.HistoryUsecase {
+func NewMockHistoryUsecase() usecase.HistoryUsecase {
 	return &mockHistoryUsecase{}
 }
 
@@ -38,8 +38,8 @@ func (u *mockHistoryUsecase) GetHistory(id int) (history *model.History, err err
 }
 
 func TestGetHistories(t *testing.T) {
-	interactor := NewMockHistoryUsecase()
-	controller := NewHistoryController(interactor)
+	usecase := NewMockHistoryUsecase()
+	controller := NewHistoryController(usecase)
 
 	histories, err := controller.GetHistories()
 
@@ -48,8 +48,8 @@ func TestGetHistories(t *testing.T) {
 }
 
 func TestRegisterHistory(t *testing.T) {
-	interactor := NewMockHistoryUsecase()
-	controller := NewHistoryController(interactor)
+	usecase := NewMockHistoryUsecase()
+	controller := NewHistoryController(usecase)
 
 	history := model.NewHistory(1, 1, 4000, "TEST", time.Now())
 	err := controller.RegisterHistory(history)

@@ -1,8 +1,8 @@
 package repositories
 
 import (
-	"go-accountbook/entity/model"
-	"go-accountbook/entity/repository"
+	"go-accountbook/domain/model"
+	"go-accountbook/domain/repository"
 
 	"github.com/jinzhu/gorm"
 )

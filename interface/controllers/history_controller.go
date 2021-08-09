@@ -1,12 +1,12 @@
 package controllers
 
 import (
-	"go-accountbook/entity/model"
-	"go-accountbook/usecase/interactor"
+	"go-accountbook/domain/model"
+	"go-accountbook/domain/usecase"
 )
 
 type historyController struct {
-	historyInteractor interactor.HistoryUsecase
+	usecase usecase.HistoryUsecase
 }
 
 type HistoryController interface {
@@ -15,20 +15,20 @@ type HistoryController interface {
 }
 
 // NewHistoryController is Constructor History controller
-func NewHistoryController(i interactor.HistoryUsecase) HistoryController {
+func NewHistoryController(i usecase.HistoryUsecase) HistoryController {
 	return &historyController{
-		historyInteractor: i,
+		usecase: i,
 	}
 }
 
 func (c *historyController) GetHistories() ([]*model.History, error) {
-	return c.historyInteractor.GetHistories()
+	return c.usecase.GetHistories()
 }
 
 func (c *historyController) RegisterHistory(history *model.History) error {
-	return c.historyInteractor.RegisterHistory(history)
+	return c.usecase.RegisterHistory(history)
 }
 
 func (c *historyController) GetHistory(id int) (history *model.History, err error) {
-	return c.historyInteractor.GetHistory(id)
+	return c.usecase.GetHistory(id)
 }
