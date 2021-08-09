@@ -51,7 +51,13 @@ func TestRegisterHistory(t *testing.T) {
 	usecase := NewMockHistoryUsecase()
 	controller := NewHistoryController(usecase)
 
-	history := model.NewHistory(1, 1, 4000, "TEST", time.Now())
+	history := &model.History{
+		AccountID:  1,
+		CategoryID: 1,
+		Amount:     4000,
+		Memo:       "TEST",
+		Date:       time.Now(),
+	}
 	err := controller.RegisterHistory(history)
 
 	assert.NoError(t, err)

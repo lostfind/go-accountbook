@@ -1,6 +1,6 @@
 package model
 
-// Account is m_account model
+// Account 자산구분 모델
 type Account struct {
 	ID          int    `gorm:"primary_key"`
 	Name        string `gorm:"name"`
@@ -10,21 +10,7 @@ type Account struct {
 	DeleteFlag  bool   `gorm:"is_delete"`
 }
 
-// NewAccount constructor Account
-func NewAccount(name string, balance int, accountType int) *Account {
-	return &Account{
-		Name:        name,
-		Balance:     balance,
-		AccountType: accountType,
-	}
-}
-
-// TableName return Table Name
-func (Account) TableName() string {
-	return "m_accounts"
-}
-
-// SetBalance is Set Balance
+// SetBalance 잔액 설정
 func (m *Account) SetBalance(balance int) {
 	m.Balance = balance
 }

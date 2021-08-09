@@ -5,26 +5,44 @@ import (
 	"time"
 )
 
-func TestSetYearMonth(t *testing.T) {
-	testCases := []struct {
-		ym        string
-		want      time.Time
-		wantError string
-	}{
-		{"2020-04", time.Date(2020, 4, 1, 0, 0, 0, 0, time.Local), ""},
-		{"202005", *new(time.Time), "Parse err"},
+func TestBudget_SetYearMonth(t *testing.T) {
+	type fields struct {
+		ID        int
+		YearMonth time.Time
+		Category  Category
+		Amount    int
+		Balance   int
 	}
-
-	for i, tc := range testCases {
-		budget := new(Budget)
-
-		err := budget.SetYearMonth(tc.ym)
-		if err != nil && err.Error() != tc.wantError {
-			t.Errorf("%d) Error is %s; want %s", i+1, err, tc.wantError)
-		}
-
-		if got := budget.YearMonth; got != tc.want {
-			t.Errorf("%d) SetYearMonth(%s) = %s; want %s", i+1, tc.ym, got, tc.want)
-		}
+	type args struct {
+		ym string
+	}
+	tests := []struct {
+		name    string
+		fields  fields
+		args    args
+		want    time.Time
+		wantErr bool
+	}{
+		{name: "", args: args{"2020-04"}, want: time.Date(2020, 4, 1, 0, 0, 0, 0, time.Local), wantErr: false},
+		{name: "", args: args{"202005"}, wantErr: true},
+	}
+	for _, tt := range tests {
+		tt := tt
+		t.Run(tt.name, func(t *testing.T) {
+			t.Parallel()
+			b := &Budget{
+				ID:        tt.fields.ID,
+				YearMonth: tt.fields.YearMonth,
+				Category:  tt.fields.Category,
+				Amount:    tt.fields.Amount,
+				Balance:   tt.fields.Balance,
+			}
+			if err := b.SetYearMonth(tt.args.ym); (err != nil) != tt.wantErr {
+				t.Errorf("Budget.SetYearMonth() error = %v, wantErr %v", err, tt.wantErr)
+			}
+			if got := b.YearMonth; got != tt.want {
+				t.Errorf("Budget.SetYearMonth() = %v, want %v", got, tt.want)
+			}
+		})
 	}
 }

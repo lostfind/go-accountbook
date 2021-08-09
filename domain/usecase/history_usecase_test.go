@@ -49,7 +49,13 @@ func TestRegisterHistory(t *testing.T) {
 	categoryID := rand.Intn(10)
 	amount := rand.Intn(50000)
 	memo := "TEST"
-	history := model.NewHistory(accountID, categoryID, amount, memo, time.Now())
+	history := &model.History{
+		AccountID:  accountID,
+		CategoryID: categoryID,
+		Amount:     amount,
+		Memo:       memo,
+		Date:       time.Now(),
+	}
 
 	historyUsecase.RegisterHistory(history)
 
