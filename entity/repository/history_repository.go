@@ -1,7 +1,7 @@
 package repository
 
 import (
-	"github.com/lostfind/go-accountbook/entity/model"
+	"go-accountbook/entity/model"
 )
 
 // HistoryRepository is Repository for History

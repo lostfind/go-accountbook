@@ -1,9 +1,10 @@
 package repositories
 
 import (
+	"go-accountbook/entity/model"
+	"go-accountbook/entity/repository"
+
 	"github.com/jinzhu/gorm"
-	"github.com/lostfind/go-accountbook/entity/model"
-	"github.com/lostfind/go-accountbook/entity/repository"
 )
 
 type historyRepository struct {

@@ -1,8 +1,8 @@
 package interactor
 
 import (
-	"github.com/lostfind/go-accountbook/entity/model"
-	"github.com/lostfind/go-accountbook/entity/repository"
+	"go-accountbook/entity/model"
+	"go-accountbook/entity/repository"
 )
 
 // HistoryUsecase is interactor of History

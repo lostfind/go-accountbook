@@ -3,7 +3,8 @@ package datastore
 import (
 	"testing"
 
-	"github.com/lostfind/go-accountbook/conf"
+	"go-accountbook/conf"
+
 	"github.com/stretchr/testify/assert"
 )
 

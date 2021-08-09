@@ -1,8 +1,9 @@
 package registry
 
 import (
+	"go-accountbook/infrastructure/router"
+
 	"github.com/jinzhu/gorm"
-	"github.com/lostfind/go-accountbook/infrastructure/router"
 )
 
 type Interactor interface {

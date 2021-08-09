@@ -3,9 +3,10 @@ package datastore
 import (
 	"fmt"
 
+	"go-accountbook/conf"
+
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
-	"github.com/lostfind/go-accountbook/conf"
 
 	"golang.org/x/xerrors"
 )

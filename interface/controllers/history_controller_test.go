@@ -5,8 +5,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/lostfind/go-accountbook/entity/model"
-	"github.com/lostfind/go-accountbook/usecase/interactor"
+	"go-accountbook/entity/model"
+	"go-accountbook/usecase/interactor"
+
 	"github.com/stretchr/testify/assert"
 )
 

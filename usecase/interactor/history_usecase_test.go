@@ -7,8 +7,8 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	"github.com/lostfind/go-accountbook/entity/model"
-	"github.com/lostfind/go-accountbook/entity/repository"
+	"go-accountbook/entity/model"
+	"go-accountbook/entity/repository"
 )
 
 type mockHistoryRepository struct {

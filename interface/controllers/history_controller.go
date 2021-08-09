@@ -1,8 +1,8 @@
 package controllers
 
 import (
-	"github.com/lostfind/go-accountbook/entity/model"
-	"github.com/lostfind/go-accountbook/usecase/interactor"
+	"go-accountbook/entity/model"
+	"go-accountbook/usecase/interactor"
 )
 
 type historyController struct {

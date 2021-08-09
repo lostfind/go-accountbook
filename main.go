@@ -3,8 +3,8 @@ package main
 import (
 	"fmt"
 
-	"github.com/lostfind/go-accountbook/conf"
-	"github.com/lostfind/go-accountbook/infrastructure/datastore"
+	"go-accountbook/conf"
+	"go-accountbook/infrastructure/datastore"
 )
 
 func main() {
