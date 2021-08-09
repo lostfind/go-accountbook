@@ -68,11 +68,11 @@ func TestAccount_GetTypeName(t *testing.T) {
 		fields fields
 		want   string
 	}{
-		{name: "자산구분 1 (Cash)", fields: fields{AccountType: 1}, want: "Cash"},
-		{name: "자산구분 2 (Bank)", fields: fields{AccountType: 2}, want: "Bank"},
-		{name: "자산구분 3 (Debit)", fields: fields{AccountType: 3}, want: "Debit Card"},
-		{name: "자산구분 4 (Credit)", fields: fields{AccountType: 4}, want: "Credit Card"},
-		{name: "자산구분 5 (E-Money)", fields: fields{AccountType: 5}, want: "Electric Money"},
+		{name: "자산구분 1 (Cash)", fields: fields{AccountType: Cash}, want: "Cash"},
+		{name: "자산구분 2 (Bank)", fields: fields{AccountType: Bank}, want: "Bank"},
+		{name: "자산구분 3 (Debit)", fields: fields{AccountType: Debit}, want: "Debit Card"},
+		{name: "자산구분 4 (Credit)", fields: fields{AccountType: Credit}, want: "Credit Card"},
+		{name: "자산구분 5 (E-Money)", fields: fields{AccountType: EMoney}, want: "Electric Money"},
 		{name: "자산구분없음", fields: fields{AccountType: 99}, want: ""},
 	}
 	for _, tt := range tests {

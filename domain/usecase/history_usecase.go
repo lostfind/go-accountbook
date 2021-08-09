@@ -3,6 +3,8 @@ package usecase
 import (
 	"go-accountbook/domain/model"
 	"go-accountbook/domain/repository"
+
+	log "github.com/sirupsen/logrus"
 )
 
 // HistoryUsecase is interactor of History
@@ -26,6 +28,7 @@ func NewHistoryUsecase(repo repository.HistoryRepository) HistoryUsecase {
 func (u *historyUsecase) RegisterHistory(history *model.History) error {
 	err := u.repo.Save(history)
 	if err != nil {
+		log.Error(err)
 		return err
 	}
 	return nil
@@ -34,6 +37,7 @@ func (u *historyUsecase) RegisterHistory(history *model.History) error {
 func (u *historyUsecase) GetHistories() (histories []*model.History, err error) {
 	histories, err = u.repo.FindAll()
 	if err != nil {
+		log.Error(err)
 		return nil, err
 	}
 	return

@@ -2,11 +2,11 @@ package model
 
 // Category 항목에 대한 모델
 type Category struct {
-	ID         int    `gorm:"primary_key"`
-	Name       string `gorm:"name"`
-	Count      int    `gorm:"count"`
-	Sort       int    `gorm:"sort"`
-	DeleteFlag bool   `gorm:"is_delete"`
+	ID         int
+	Name       string
+	Count      int
+	Sort       int
+	DeleteFlag bool
 }
 
 // NewCategory is constructor Category

@@ -1,9 +1,8 @@
 package registry
 
 import (
+	"database/sql"
 	"go-accountbook/infrastructure/router"
-
-	"github.com/jinzhu/gorm"
 )
 
 type Interactor interface {
@@ -11,10 +10,10 @@ type Interactor interface {
 }
 
 type interactor struct {
-	conn *gorm.DB
+	conn *sql.DB
 }
 
-func NewInteractor(conn *gorm.DB) Interactor {
+func NewInteractor(conn *sql.DB) Interactor {
 	return &interactor{
 		conn: conn,
 	}

@@ -1,24 +1,25 @@
 package datastore
 
 import (
-	"github.com/jinzhu/gorm"
-	_ "github.com/jinzhu/gorm/dialects/sqlite"
-	"golang.org/x/xerrors"
+	"database/sql"
+	"os"
+
+	_ "github.com/mattn/go-sqlite3"
 )
 
-// NewSqliteDB returns a gorm DB connection.
-func NewSqliteDB() (*gorm.DB, error) {
-	db, err := gorm.Open("sqlite3", "../../tmp/accountbook.db")
+func NewSqliteDB() *sql.DB {
+	sqliteDatabase, _ := sql.Open("sqlite3", "../../db/accountbook.db")
+	return sqliteDatabase
+}
 
-	if err != nil {
-		return db, xerrors.Errorf("gorm open error: %w", err)
-	}
+func NewSqliteTestDB() *sql.DB {
+	os.Remove("../../db/accountbook_test.db")
+	sqliteDatabase, _ := sql.Open("sqlite3", "../../db/accountbook_test.db")
+	return sqliteDatabase
+}
 
-	if err := db.DB().Ping(); err != nil {
-		return db, xerrors.Errorf("gorm ping error: %w", err)
-	}
-
-	db.LogMode(true)
-
-	return db, err
+func NewSqliteTestEmptyDB() *sql.DB {
+	os.Remove("../../db/accountbook_empty_test.db")
+	sqliteDatabase, _ := sql.Open("sqlite3", "../../db/accountbook_empty_test.db")
+	return sqliteDatabase
 }

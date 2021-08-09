@@ -2,13 +2,21 @@ package model
 
 // Account 자산구분 모델
 type Account struct {
-	ID          int    `gorm:"primary_key"`
-	Name        string `gorm:"name"`
-	AccountType int    `gorm:"account_type"`
-	Sort        int    `gorm:"sort"`
-	Balance     int    `gorm:"balance"`
-	DeleteFlag  bool   `gorm:"is_delete"`
+	ID          int
+	Name        string
+	AccountType int
+	Sort        int
+	Balance     int
+	DeleteFlag  bool
 }
+
+const (
+	Cash = iota + 1
+	Bank
+	Debit
+	Credit
+	EMoney
+)
 
 // SetBalance 잔액 설정
 func (m *Account) SetBalance(balance int) {
@@ -18,15 +26,15 @@ func (m *Account) SetBalance(balance int) {
 // GetTypeName return Account type name
 func (m *Account) GetTypeName() string {
 	switch m.AccountType {
-	case 1:
+	case Cash:
 		return "Cash"
-	case 2:
+	case Bank:
 		return "Bank"
-	case 3:
+	case Debit:
 		return "Debit Card"
-	case 4:
+	case Credit:
 		return "Credit Card"
-	case 5:
+	case EMoney:
 		return "Electric Money"
 	}
 
