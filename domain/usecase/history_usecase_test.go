@@ -3,7 +3,6 @@ package usecase
 import (
 	"math/rand"
 	"testing"
-	"time"
 
 	"github.com/stretchr/testify/assert"
 
@@ -32,12 +31,12 @@ func (r *mockHistoryRepository) Find(id int) (history *model.History, err error)
 	history.CategoryID = rand.Intn(10)
 	history.Amount = rand.Intn(50000)
 	history.Memo = "TEST"
-	history.Date = time.Now()
+	history.Date = "2020/01/05"
 
 	return
 }
 
-func (r *mockHistoryRepository) FindAll() (histories []*model.History, err error) {
+func (r *mockHistoryRepository) FindAll() (histories model.Histories, err error) {
 	return
 }
 
@@ -54,7 +53,7 @@ func TestRegisterHistory(t *testing.T) {
 		CategoryID: categoryID,
 		Amount:     amount,
 		Memo:       memo,
-		Date:       time.Now(),
+		Date:       "2020/01/05",
 	}
 
 	historyUsecase.RegisterHistory(history)

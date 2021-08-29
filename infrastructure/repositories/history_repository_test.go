@@ -57,6 +57,7 @@ func Test_historyRepository_Find(t *testing.T) {
 				db: tt.fields.db,
 			}
 			gotHistory, err := r.Find(tt.args.id)
+
 			if (err != nil) != tt.wantErr {
 				t.Errorf("historyRepository.Find() error = %v, wantErr %v", err, tt.wantErr)
 				return

@@ -1,24 +1,16 @@
 package registry
 
 import (
-	"database/sql"
-	"go-accountbook/infrastructure/router"
+	"go-accountbook/domain/usecase"
+	"go-accountbook/infrastructure/datastore"
+	"go-accountbook/infrastructure/repositories"
+	"go-accountbook/interface/api/controllers"
 )
 
-type Interactor interface {
-	NewHandlers() router.Handlers
-}
+func InjectionHistory() controllers.HistoryController {
+	db := datastore.NewSqliteDB()
+	repo := repositories.NewHistoryRepository(db)
+	usecase := usecase.NewHistoryUsecase(repo)
 
-type interactor struct {
-	conn *sql.DB
-}
-
-func NewInteractor(conn *sql.DB) Interactor {
-	return &interactor{
-		conn: conn,
-	}
-}
-
-func (i *interactor) NewHandlers() router.Handlers {
-	return router.Handlers{}
+	return controllers.NewHistoryController(usecase)
 }

@@ -28,7 +28,7 @@ func (r *historyRepository) Find(id int) (*model.History, error) {
 
 	stmt, err := r.db.Prepare(selectSQL)
 	if err != nil {
-		log.Error(err)
+		log.Error("HISTORY_REPO_FIND", err)
 		return history, err
 	}
 	defer stmt.Close()
