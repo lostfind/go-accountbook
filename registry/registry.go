@@ -9,7 +9,7 @@ import (
 
 func InjectionHistory() controllers.HistoryController {
 	db := datastore.NewSqliteDB()
-	repo := repositories.NewHistoryRepository(db)
+	repo := repositories.NewSqlRepository(db)
 	usecase := usecase.NewHistoryUsecase(repo)
 
 	return controllers.NewHistoryController(usecase)
