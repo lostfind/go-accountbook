@@ -1,4 +1,4 @@
-package repositories
+package sqlrepo
 
 import (
 	"database/sql"

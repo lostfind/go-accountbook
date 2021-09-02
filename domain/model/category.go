@@ -9,6 +9,8 @@ type Category struct {
 	DeleteFlag bool
 }
 
+type Categories []*Category
+
 // NewCategory is constructor Category
 func NewCategory(name string) *Category {
 	return &Category{

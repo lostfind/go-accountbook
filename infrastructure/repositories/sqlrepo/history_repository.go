@@ -1,25 +1,12 @@
-package repositories
+package sqlrepo
 
 import (
-	"database/sql"
 	"go-accountbook/domain/model"
-	"go-accountbook/domain/repository"
 
 	log "github.com/sirupsen/logrus"
 )
 
-type historyRepository struct {
-	db *sql.DB
-}
-
-// NewHistoryRepository is constructor History Repository
-func NewHistoryRepository(db *sql.DB) repository.HistoryRepository {
-	return &historyRepository{
-		db: db,
-	}
-}
-
-func (r *historyRepository) Find(id int) (*model.History, error) {
+func (r *sqlRepo) Find(id int) (*model.History, error) {
 	history := &model.History{}
 
 	selectSQL := `SELECT id, account_id, category_id, amount, memo, date
@@ -28,7 +15,7 @@ func (r *historyRepository) Find(id int) (*model.History, error) {
 
 	stmt, err := r.db.Prepare(selectSQL)
 	if err != nil {
-		log.Error(err)
+		log.Error("HISTORY_REPO_FIND", err)
 		return history, err
 	}
 	defer stmt.Close()
@@ -42,7 +29,7 @@ func (r *historyRepository) Find(id int) (*model.History, error) {
 	return history, nil
 }
 
-func (r *historyRepository) FindAll() (model.Histories, error) {
+func (r *sqlRepo) FindAll() (model.Histories, error) {
 	histories := model.Histories{}
 
 	selectSQL := `SELECT id, account_id, category_id, amount, memo, date FROM histories`
@@ -63,6 +50,6 @@ func (r *historyRepository) FindAll() (model.Histories, error) {
 	return histories, nil
 }
 
-func (r *historyRepository) Save(history *model.History) (err error) {
+func (r *sqlRepo) Save(history *model.History) (err error) {
 	return err
 }

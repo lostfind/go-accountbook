@@ -1,4 +1,4 @@
-package repositories
+package sqlrepo
 
 import (
 	"database/sql"
@@ -8,7 +8,7 @@ import (
 	"testing"
 )
 
-func TestNewHistoryRepository(t *testing.T) {
+func TestNewSqlRepository(t *testing.T) {
 	testDB := InitTestDB()
 	defer testDB.Close()
 
@@ -20,12 +20,12 @@ func TestNewHistoryRepository(t *testing.T) {
 		args args
 		want repository.HistoryRepository
 	}{
-		{name: "정상패턴", args: args{testDB}, want: &historyRepository{testDB}},
+		{name: "정상패턴", args: args{testDB}, want: &sqlRepo{testDB}},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := NewHistoryRepository(tt.args.db); !reflect.DeepEqual(got, tt.want) {
-				t.Errorf("NewHistoryRepository() = %v, want %v", got, tt.want)
+			if got := NewSqlRepository(tt.args.db); !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("NewSqlRepository() = %v, want %v", got, tt.want)
 			}
 		})
 	}
@@ -53,16 +53,17 @@ func Test_historyRepository_Find(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			r := &historyRepository{
+			r := &sqlRepo{
 				db: tt.fields.db,
 			}
 			gotHistory, err := r.Find(tt.args.id)
+
 			if (err != nil) != tt.wantErr {
-				t.Errorf("historyRepository.Find() error = %v, wantErr %v", err, tt.wantErr)
+				t.Errorf("sqlRepo.Find() error = %v, wantErr %v", err, tt.wantErr)
 				return
 			}
 			if !reflect.DeepEqual(gotHistory, tt.wantHistory) {
-				t.Errorf("historyRepository.Find() = %v, want %v", gotHistory, tt.wantHistory)
+				t.Errorf("sqlRepo.Find() = %v, want %v", gotHistory, tt.wantHistory)
 			}
 		})
 	}
@@ -103,16 +104,16 @@ func Test_historyRepository_FindAll(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			r := &historyRepository{
+			r := &sqlRepo{
 				db: tt.fields.db,
 			}
 			got, err := r.FindAll()
 			if (err != nil) != tt.wantErr {
-				t.Errorf("historyRepository.FindAll() error = %v, wantErr %v", err, tt.wantErr)
+				t.Errorf("sqlRepo.FindAll() error = %v, wantErr %v", err, tt.wantErr)
 				return
 			}
 			if !reflect.DeepEqual(got, tt.want) {
-				t.Errorf("historyRepository.FindAll() = %v, want %v", got, tt.want)
+				t.Errorf("sqlRepo.FindAll() = %v, want %v", got, tt.want)
 			}
 		})
 	}
