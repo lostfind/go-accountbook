@@ -37,6 +37,11 @@ func (u *mockHistoryUsecase) GetHistory(id int) (history *model.History, err err
 	return
 }
 
+func (u *mockHistoryUsecase) MoveAsset(amount, fromAccountID, toAccountID int) (*model.History, error) {
+	// TODO: implements
+	return nil, nil
+}
+
 func TestGetHistories(t *testing.T) {
 	usecase := NewMockHistoryUsecase()
 	controller := NewHistoryController(usecase)

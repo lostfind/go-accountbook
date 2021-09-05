@@ -93,3 +93,46 @@ func TestAccount_GetTypeName(t *testing.T) {
 		})
 	}
 }
+
+func TestAccount_UpdateBalance(t *testing.T) {
+	type fields struct {
+		ID          int
+		Name        string
+		AccountType int
+		Sort        int
+		Balance     int
+		DeleteFlag  bool
+	}
+	type args struct {
+		amount int
+	}
+	tests := []struct {
+		name   string
+		fields fields
+		args   args
+		want   int
+	}{
+		{name: "잔액 감소", fields: fields{Balance: 50000}, args: args{-500}, want: 49500},
+		{name: "잔액 증가", fields: fields{Balance: 50000}, args: args{8000}, want: 58000},
+		{name: "변경 없음", fields: fields{Balance: 50000}, args: args{0}, want: 50000},
+	}
+	for _, tt := range tests {
+		tt := tt
+		t.Run(tt.name, func(t *testing.T) {
+			t.Parallel()
+			m := &Account{
+				ID:          tt.fields.ID,
+				Name:        tt.fields.Name,
+				AccountType: tt.fields.AccountType,
+				Sort:        tt.fields.Sort,
+				Balance:     tt.fields.Balance,
+				DeleteFlag:  tt.fields.DeleteFlag,
+			}
+			m.UpdateBalance(tt.args.amount)
+
+			if got := m.Balance; got != tt.want {
+				t.Errorf("Account.UpdateBalance() -> %v, want %v", got, tt.want)
+			}
+		})
+	}
+}

@@ -53,3 +53,8 @@ func (r *sqlRepo) FindAll() (model.Histories, error) {
 func (r *sqlRepo) Save(history *model.History) (err error) {
 	return err
 }
+
+func (r *sqlRepo) FindAccounts(id []int) (map[int]*model.Account, error) {
+	//TODO: implements
+	return nil, nil
+}

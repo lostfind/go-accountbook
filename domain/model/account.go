@@ -40,3 +40,7 @@ func (m *Account) GetTypeName() string {
 
 	return ""
 }
+
+func (m *Account) UpdateBalance(amount int) {
+	m.Balance += amount
+}
