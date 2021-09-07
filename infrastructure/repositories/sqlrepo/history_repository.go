@@ -51,10 +51,23 @@ func (r *sqlRepo) FindAll() (model.Histories, error) {
 }
 
 func (r *sqlRepo) Save(history *model.History) (err error) {
-	return err
+	ins, err := r.db.Prepare("INSERT INTO histories(account_id,amount,memo) VALUES(?,?,?)")
+	if err != nil {
+		log.Fatal(err)
+		return err
+	}
+	ins.Exec(history.AccountID, history.Amount, history.Memo)
+
+	return nil
 }
 
 func (r *sqlRepo) FindAccounts(id []int) (map[int]*model.Account, error) {
 	//TODO: implements
-	return nil, nil
+	account := make(map[int]*model.Account, len(id))
+
+	for _, i := range id {
+		account[i] = &model.Account{ID: i, Balance: 60000}
+	}
+
+	return account, nil
 }

@@ -5,10 +5,12 @@ import (
 
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
+	"github.com/joho/godotenv"
 )
 
 func main() {
 	// historyCtr := registry.InjectionHistoryCtr()
+	godotenv.Load()
 
 	historyCtl := registry.InjectionHistory()
 
@@ -22,6 +24,7 @@ func main() {
 	server.Use(cors.Default())
 	server.GET("/history/:id", historyCtl.GetHistory)
 	server.GET("/history", historyCtl.GetHistories)
+	server.POST("/assetmove", historyCtl.MoveAsset)
 
 	server.Run()
 }

@@ -41,6 +41,10 @@ func (m *Account) GetTypeName() string {
 	return ""
 }
 
-func (m *Account) UpdateBalance(amount int) {
+func (m *Account) DecreaseBalance(amount int) {
+	m.Balance -= amount
+}
+
+func (m *Account) IncreaseBalance(amount int) {
 	m.Balance += amount
 }

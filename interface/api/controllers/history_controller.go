@@ -18,6 +18,7 @@ type historyController struct {
 type HistoryController interface {
 	GetHistory(*gin.Context)
 	GetHistories(ctx *gin.Context)
+	MoveAsset(ctx *gin.Context)
 	RegisterHistory(history *model.History) error
 }
 
@@ -26,6 +27,18 @@ func NewHistoryController(i usecase.HistoryUsecase) HistoryController {
 	return &historyController{
 		usecase: i,
 	}
+}
+func (c *historyController) MoveAsset(ctx *gin.Context) {
+	amount, _ := strconv.Atoi(ctx.Param("amount"))
+	fromAccountID, _ := strconv.Atoi(ctx.Param("fromAccID"))
+	toAccountID, _ := strconv.Atoi(ctx.Param("toAccID"))
+
+	histories, err := c.usecase.MoveAsset(amount, fromAccountID, toAccountID)
+	if err != nil {
+		fmt.Errorf("MoveAssetERR : %v", err)
+	}
+
+	ctx.JSON(http.StatusOK, histories)
 }
 
 func (c *historyController) RegisterHistory(history *model.History) error {

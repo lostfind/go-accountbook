@@ -9,7 +9,7 @@ import (
 )
 
 func NewSqliteDB() *sql.DB {
-	sqliteDatabase, err := sql.Open("sqlite3", "/Users/dwkim/development/accountbook/go-accountbook/db/accountbook.db")
+	sqliteDatabase, err := sql.Open("sqlite3", os.Getenv("SQLITE_PROD_DB_FILE"))
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -17,13 +17,13 @@ func NewSqliteDB() *sql.DB {
 }
 
 func NewSqliteTestDB() *sql.DB {
-	os.Remove("/Users/dwkim/development/accountbook/go-accountbook/db/accountbook_test.db")
-	sqliteDatabase, _ := sql.Open("sqlite3", "/Users/dwkim/development/accountbook/go-accountbook/db/accountbook_test.db")
+	os.Remove(os.Getenv("SQLITE_TEST_DB_FILE"))
+	sqliteDatabase, _ := sql.Open("sqlite3", os.Getenv("SQLITE_TEST_DB_FILE"))
 	return sqliteDatabase
 }
 
 func NewSqliteTestEmptyDB() *sql.DB {
-	os.Remove("/Users/dwkim/development/accountbook/go-accountbook/db/accountbook_empty_test.db")
-	sqliteDatabase, _ := sql.Open("sqlite3", "/Users/dwkim/development/accountbook/go-accountbook/db/accountbook_empty_test.db")
+	os.Remove(os.Getenv("SQLITE_EMPTY_DB_FILE"))
+	sqliteDatabase, _ := sql.Open("sqlite3", os.Getenv("SQLITE_EMPTY_DB_FILE"))
 	return sqliteDatabase
 }

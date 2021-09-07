@@ -59,15 +59,15 @@ func (u *historyUsecase) MoveAsset(amount, fromAccountID, toAccountID int) (mode
 
 	fromAccount := accounts[fromAccountID]
 	toAccount := accounts[toAccountID]
-	fromAccount.UpdateBalance(amount * -1)
-	toAccount.UpdateBalance(amount)
+	fromAccount.DecreaseBalance(amount)
+	toAccount.IncreaseBalance(amount)
 
 	if fromAccount.Balance < 0 {
 		return nil, errors.New("잔액이 부족합니다")
 	}
 
-	fromHistory := model.History{}
-	toHistory := model.History{}
+	fromHistory := model.History{AccountID: fromAccountID, Amount: amount * -1, Memo: "자산이동"}
+	toHistory := model.History{AccountID: toAccountID, Amount: amount, Memo: "자산이동"}
 
 	if err := u.repo.Save(&fromHistory); err != nil {
 		log.Error(err)

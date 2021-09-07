@@ -94,7 +94,7 @@ func TestAccount_GetTypeName(t *testing.T) {
 	}
 }
 
-func TestAccount_UpdateBalance(t *testing.T) {
+func TestAccount_IncreaseBalance(t *testing.T) {
 	type fields struct {
 		ID          int
 		Name        string
@@ -128,10 +128,10 @@ func TestAccount_UpdateBalance(t *testing.T) {
 				Balance:     tt.fields.Balance,
 				DeleteFlag:  tt.fields.DeleteFlag,
 			}
-			m.UpdateBalance(tt.args.amount)
+			m.IncreaseBalance(tt.args.amount)
 
 			if got := m.Balance; got != tt.want {
-				t.Errorf("Account.UpdateBalance() -> %v, want %v", got, tt.want)
+				t.Errorf("Account.IncreaseBalance() -> %v, want %v", got, tt.want)
 			}
 		})
 	}
